@@ -7,6 +7,7 @@ import java.io.Serializable;
  * 此值对象用于保存实体的ID
  */
 public class DomainId  implements Serializable {
+	
     public DomainId(String domainId){
         this.setId(domainId);
     }

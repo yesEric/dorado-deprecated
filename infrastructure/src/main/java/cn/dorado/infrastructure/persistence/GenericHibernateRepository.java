@@ -11,7 +11,7 @@ import javax.annotation.Resource;
 /**
  * Created by Eric on 14-4-30.
  */
-public class GenericHibernateRepository {
+public  class GenericHibernateRepository {
     @Resource
     private SessionFactory sessionFactory;
     public SessionFactory getSessionFactory() {

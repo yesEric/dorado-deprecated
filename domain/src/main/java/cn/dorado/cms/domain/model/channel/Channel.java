@@ -1,12 +1,17 @@
 package cn.dorado.cms.domain.model.channel;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+import org.hibernate.annotations.GenericGenerator;
+
 import cn.dorado.cms.domain.AbstractEntity;
 import cn.dorado.cms.domain.DomainId;
 import cn.dorado.cms.domain.model.common.ApprovalState;
 import cn.dorado.cms.domain.model.common.PublishState;
 import cn.dorado.util.DateUtil;
-
-import javax.persistence.*;
 
 /**
  * Created by Eric on 14-4-29.
@@ -14,8 +19,8 @@ import javax.persistence.*;
 @Entity(name="channel")
 public class Channel extends AbstractEntity {
     @Id
-    DomainId channelId;
-    @Column
+    String channelId;
+    @Column(length=255)
     String title;
 
     @Column
@@ -30,7 +35,7 @@ public class Channel extends AbstractEntity {
     public Channel(){
         super();
     }
-   public Channel(DomainId channelId,String title,String ownerName){
+   public Channel(String channelId,String title,String ownerName){
        this.setChannelId(channelId);
        this.setTitle(title);
        this.setOwner(ownerName);
@@ -39,11 +44,11 @@ public class Channel extends AbstractEntity {
        this.setApprovalState(ApprovalState.INIT);
 
    }
-    public DomainId getChannelId() {
+    public String getChannelId() {
         return channelId;
     }
 
-    protected void setChannelId(DomainId chancelId) {
+    protected void setChannelId(String chancelId) {
         this.channelId = chancelId;
     }
 

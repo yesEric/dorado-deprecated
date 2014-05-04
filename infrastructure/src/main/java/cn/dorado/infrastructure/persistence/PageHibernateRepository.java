@@ -13,12 +13,12 @@ import java.util.Collection;
  * Created by Eric on 14-5-4.
  */
 public class PageHibernateRepository extends GenericHibernateRepository implements PageRepository {
-    @Override
+    
     public DomainId nextIdentity() {
         return new DomainId(java.util.UUID.randomUUID().toString().toUpperCase());
     }
 
-    @Override
+    
     public void add(Page page) {
         try {
             this.getSession().saveOrUpdate(page);
@@ -27,7 +27,7 @@ public class PageHibernateRepository extends GenericHibernateRepository implemen
         }
     }
 
-    @Override
+    
     public void addAll(Collection<Page> pageCollection) {
         try{
             for(Page page : pageCollection){
@@ -39,24 +39,24 @@ public class PageHibernateRepository extends GenericHibernateRepository implemen
 
     }
 
-    @Override
+    
     public void remove(Page page) {
       this.getSession().delete(page);
     }
 
-    @Override
+    
     public void removeAll(Collection<Page> pageCollection) {
         for(Page page:pageCollection){
             this.getSession().delete(page);
         }
     }
 
-    @Override
+    
     public Page pageOfId(DomainId pageId) {
         return (Page)this.getSession().get(Page.class, pageId);
     }
 
-    @Override
+    
     public Article createArticle(Article article) {
         return null;
     }

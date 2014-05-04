@@ -21,7 +21,7 @@ import java.util.*;
 
                 "classpath:**/applicationContext*.xml"}
 )
-public class BaseRepositoryTestCase extends AbstractTransactionalJUnit4SpringContextTests {
+public abstract class BaseRepositoryTestCase extends AbstractTransactionalJUnit4SpringContextTests {
 
     @Autowired
     private SessionFactory sessionFactory;

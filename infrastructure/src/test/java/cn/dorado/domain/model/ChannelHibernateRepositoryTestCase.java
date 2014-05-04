@@ -21,7 +21,7 @@ public class ChannelHibernateRepositoryTestCase extends BaseRepositoryTestCase {
 
     @Test
     public void testAddAndRemoveChannel() throws Exception{
-        DomainId channelId=channelRepository.nextIdentity();
+        String channelId=channelRepository.nextIdentity();
         Owner owner=new Owner();
         owner.setOwnerName("Eric");
 

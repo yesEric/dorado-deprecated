@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>dorado</groupId>
+    <groupId>cn.dorado</groupId>
     <artifactId>dorado</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
@@ -79,6 +79,10 @@
     <prerequisites>
         <maven>3.1.0</maven>
     </prerequisites>
+    
+    <build>
+    <defaultGoal>install</defaultGoal>
+    </build>
     <!--Maven依赖管理
     Maven在dependencyManagement元素中为你提供了一种方式来统一依赖版本号。
     你经常会在一个组织或者项目的最顶层的父POM中看到dependencyManagement元素。
@@ -375,10 +379,6 @@
             <artifactId>spring-modules-validation</artifactId>
             <version>${springmodules.validation.version}</version>
             <exclusions>
-                <exclusion>
-                    <artifactId>*</artifactId>
-                    <groupId>org.springframework</groupId>
-                </exclusion>
                 <exclusion>
                     <artifactId>xml-apis</artifactId>
                     <groupId>xml-apis</groupId>

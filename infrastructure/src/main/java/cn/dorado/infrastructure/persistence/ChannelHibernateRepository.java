@@ -16,12 +16,12 @@ import java.util.Collection;
  */
 @Repository("channelRepository")
 public class ChannelHibernateRepository extends GenericHibernateRepository implements ChannelRepository {
-    @Override
-    public DomainId nextIdentity() {
-        return new DomainId(java.util.UUID.randomUUID().toString().toUpperCase());
+    
+    public String nextIdentity() {
+        return java.util.UUID.randomUUID().toString().toUpperCase();
     }
 
-    @Override
+    
     public void add(Channel channel) {
         try {
             this.getSession().saveOrUpdate(channel);
@@ -30,7 +30,7 @@ public class ChannelHibernateRepository extends GenericHibernateRepository imple
         }
     }
 
-    @Override
+    
     public void addAll(Collection<Channel> channelCollection) {
         try{
             for(Channel channel : channelCollection){
@@ -41,24 +41,24 @@ public class ChannelHibernateRepository extends GenericHibernateRepository imple
         }
     }
 
-    @Override
+    
     public void remove(Channel channel) {
           this.getSession().delete(channel);
     }
 
-    @Override
+   
     public void removeAll(Collection<Channel> channelCollection) {
       for(Channel channel:channelCollection){
           this.getSession().delete(channel);
       }
     }
 
-    @Override
-    public Channel ChannelOfId(DomainId channelId) {
+    
+    public Channel ChannelOfId(String channelId) {
         return (Channel)this.getSession().get(Channel.class,channelId);
     }
 
-    @Override
+    
     public Page createPage(DomainId pageId, String ownerName, String title,String channelId) {
         Page page=new Page(pageId,title,ownerName,channelId);
         return page;

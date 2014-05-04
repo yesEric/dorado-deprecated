@@ -13,48 +13,51 @@ import java.util.Collection;
  */
 @Repository("articleRepository")
 public class ArticleHibernateRepository implements ArticleRepository {
-    @Override
-    public DomainId nextIdentity() {
-        return null;
-    }
 
-    @Override
-    public void add(Article article) {
+	public DomainId nextIdentity() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    }
+	public void add(Article article) {
+		// TODO Auto-generated method stub
+		
+	}
 
-    @Override
-    public void addAll(Collection<Article> articleCollection) {
+	public void addAll(Collection<Article> articleCollection) {
+		// TODO Auto-generated method stub
+		
+	}
 
-    }
+	public void remove(Article article) {
+		// TODO Auto-generated method stub
+		
+	}
 
-    @Override
-    public void remove(Article article) {
+	public void removeAll(Collection<Article> articleCollection) {
+		// TODO Auto-generated method stub
+		
+	}
 
-    }
+	public Article articleOfId(DomainId articleId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    @Override
-    public void removeAll(Collection<Article> articleCollection) {
+	public Collection<Article> articlesOfColumn(DomainId columnId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    }
+	public Collection<Article> publishedArticlesOfAuthor(Author author) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    @Override
-    public Article articleOfId(DomainId articleId) {
-        return null;
-    }
-
-    @Override
-    public Collection<Article> articlesOfColumn(DomainId columnId) {
-        return null;
-    }
-
-    @Override
-    public Collection<Article> publishedArticlesOfAuthor(Author author) {
-        return null;
-    }
-
-    @Override
-    public Collection<Article> publishedArticlesOfColumns(DomainId columnId) {
-        return null;
-    }
+	public Collection<Article> publishedArticlesOfColumns(DomainId columnId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+    
+    
 }
