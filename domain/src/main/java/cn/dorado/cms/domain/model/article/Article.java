@@ -1,6 +1,7 @@
 package cn.dorado.cms.domain.model.article;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -9,6 +10,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import cn.dorado.cms.domain.AbstractEntity;
 import cn.dorado.cms.domain.DomainId;
+import cn.dorado.cms.domain.model.common.Author;
 import cn.dorado.cms.domain.model.page.Page;
 
 /**
@@ -26,8 +28,9 @@ public class Article extends AbstractEntity{
     String content;
     @Column
     String createDate;
-    @Column()
-    String authorName;
+
+    @Embedded
+    Author author;
     @Column
     int publishState;
     @Column
@@ -46,6 +49,7 @@ public class Article extends AbstractEntity{
 //    @Fetch(FetchMode.JOIN)
 //    Set<Comment> comments=new HashSet<Comment>();
 
+    
     @Override
     public String toString() {
         return "Article{" +
@@ -53,7 +57,7 @@ public class Article extends AbstractEntity{
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", createDate=" + createDate +
-                ", author=" + authorName +
+          
                 ", publishState=" + publishState +
                 ", approvalState=" + approvalState +
                 ", privateState=" + privateState +
@@ -64,7 +68,15 @@ public class Article extends AbstractEntity{
                 '}';
     }
 
-    @Override
+    public Author getAuthor() {
+		return author;
+	}
+
+	protected void setAuthor(Author author) {
+		this.author = author;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -113,13 +125,7 @@ public class Article extends AbstractEntity{
         this.createDate = createDate;
     }
 
-    public String getAuthor() {
-        return authorName;
-    }
 
-    protected void setAuthor(String authorName) {
-        this.authorName = authorName;
-    }
 
     public int getPublishState() {
         return publishState;

@@ -1,11 +1,11 @@
 package cn.dorado.domain.model;
 
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import cn.dorado.cms.domain.DomainId;
 import cn.dorado.cms.domain.model.article.ArticleRepository;
 import cn.dorado.domain.BaseRepositoryTestCase;
-import cn.dorado.infrastructure.persistence.ArticleHibernateRepository;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Created by Eric on 14-5-4.

@@ -1,15 +1,15 @@
 package cn.dorado.domain.model;
 
-import cn.dorado.cms.domain.DomainId;
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNull;
+
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import cn.dorado.cms.domain.model.channel.Channel;
 import cn.dorado.cms.domain.model.channel.ChannelRepository;
 import cn.dorado.cms.domain.model.common.Owner;
 import cn.dorado.domain.BaseRepositoryTestCase;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNull;
 
 /**
  * Created by Eric on 14-5-4.
