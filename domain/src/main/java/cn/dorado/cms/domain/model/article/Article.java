@@ -1,16 +1,15 @@
 package cn.dorado.cms.domain.model.article;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+import org.hibernate.annotations.GenericGenerator;
+
 import cn.dorado.cms.domain.AbstractEntity;
 import cn.dorado.cms.domain.DomainId;
 import cn.dorado.cms.domain.model.page.Page;
-import cn.dorado.cms.domain.model.common.Author;
-import cn.dorado.cms.domain.model.common.SmartDate;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
-import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Created by Eric on 14-4-29.
@@ -18,6 +17,8 @@ import java.util.Set;
 @Entity
 public class Article extends AbstractEntity{
     @Id
+    @GeneratedValue(generator = "articleIdGenerator")     
+    @GenericGenerator(name = "articleIdGenerator", strategy = "assigned")  
     DomainId articleId;
     @Column
     String title;

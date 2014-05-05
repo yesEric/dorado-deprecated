@@ -9,6 +9,8 @@
     <session-factory>
 
         <mapping class="cn.dorado.cms.domain.model.channel.Channel"/>
+         <mapping class="cn.dorado.cms.domain.model.article.Article"/>
+         <mapping class="cn.dorado.cms.domain.model.page.Page"/>
 
 
     </session-factory>
