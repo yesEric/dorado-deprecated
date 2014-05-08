@@ -12,11 +12,11 @@ import java.util.Collection;
  */
 public interface ChannelRepository {
 
-    public String nextIdentity();
+    public DomainId nextIdentity();
     public void add(Channel channel);
     public void addAll(Collection<Channel> channelCollection);
     public void remove(Channel channel);
     public void removeAll(Collection<Channel> channelCollection);
-    public Channel ChannelOfId(String channelId);
+    public Channel ChannelOfId(DomainId channelId);
     public Page createPage(DomainId pageId,String ownerName,String title,String channelId);
 }

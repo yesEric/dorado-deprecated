@@ -17,8 +17,8 @@ import java.util.Collection;
 @Repository("channelRepository")
 public class ChannelHibernateRepository extends GenericHibernateRepository implements ChannelRepository {
     
-    public String nextIdentity() {
-        return java.util.UUID.randomUUID().toString().toUpperCase();
+    public DomainId nextIdentity() {
+        return new DomainId(java.util.UUID.randomUUID().toString().toUpperCase());
     }
 
     
@@ -54,7 +54,7 @@ public class ChannelHibernateRepository extends GenericHibernateRepository imple
     }
 
     
-    public Channel ChannelOfId(String channelId) {
+    public Channel ChannelOfId(DomainId channelId) {
         return (Channel)this.getSession().get(Channel.class,channelId);
     }
 

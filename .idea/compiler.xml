@@ -29,6 +29,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="infrastructure" target="1.7" />
       <module name="webapp" target="1.6" />
     </bytecodeTargetLevel>
   </component>

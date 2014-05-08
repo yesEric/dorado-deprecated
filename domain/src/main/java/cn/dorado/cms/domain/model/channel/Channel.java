@@ -19,8 +19,7 @@ import cn.dorado.util.DateUtil;
 @Entity(name="channel")
 public class Channel extends AbstractEntity {
     @Id
-    String channelId;
-    @Column(length=255)
+    DomainId channelId;
     String title;
 
     @Column
@@ -35,7 +34,7 @@ public class Channel extends AbstractEntity {
     public Channel(){
         super();
     }
-   public Channel(String channelId,String title,String ownerName){
+   public Channel(DomainId channelId,String title,String ownerName){
        this.setChannelId(channelId);
        this.setTitle(title);
        this.setOwner(ownerName);
@@ -44,11 +43,11 @@ public class Channel extends AbstractEntity {
        this.setApprovalState(ApprovalState.INIT);
 
    }
-    public String getChannelId() {
+    public DomainId getChannelId() {
         return channelId;
     }
 
-    protected void setChannelId(String chancelId) {
+    protected void setChannelId(DomainId chancelId) {
         this.channelId = chancelId;
     }
 

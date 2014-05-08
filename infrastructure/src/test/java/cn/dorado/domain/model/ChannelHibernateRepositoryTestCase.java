@@ -3,6 +3,7 @@ package cn.dorado.domain.model;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNull;
 
+import cn.dorado.cms.domain.DomainId;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -21,7 +22,7 @@ public class ChannelHibernateRepositoryTestCase extends BaseRepositoryTestCase {
 
     @Test
     public void testAddAndRemoveChannel() throws Exception{
-        String channelId=channelRepository.nextIdentity();
+        DomainId channelId=channelRepository.nextIdentity();
         Owner owner=new Owner();
         owner.setOwnerName("Eric");
 
