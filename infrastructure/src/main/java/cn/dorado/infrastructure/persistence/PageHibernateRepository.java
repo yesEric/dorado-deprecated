@@ -4,7 +4,9 @@ import cn.dorado.cms.domain.DomainId;
 import cn.dorado.cms.domain.model.article.Article;
 import cn.dorado.cms.domain.model.page.Page;
 import cn.dorado.cms.domain.model.page.PageRepository;
+
 import org.hibernate.exception.ConstraintViolationException;
+import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -12,6 +14,7 @@ import java.util.Collection;
 /**
  * Created by Eric on 14-5-4.
  */
+@Repository("pageRepository")
 public class PageHibernateRepository extends GenericHibernateRepository implements PageRepository {
     
     public DomainId nextIdentity() {

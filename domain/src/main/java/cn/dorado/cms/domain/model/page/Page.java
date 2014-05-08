@@ -8,10 +8,11 @@ import cn.dorado.cms.domain.model.common.PublishState;
 import cn.dorado.cms.domain.model.common.SmartDate;
 import cn.dorado.util.DateUtil;
 
-
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+
 import java.text.ParseException;
 
 /**
@@ -24,7 +25,8 @@ public class Page extends AbstractEntity {
     @Column
     String title;
     @Column(name="ownerName")
-    String ownerName;
+    @Embedded
+    Owner owner;
     @Column
     int publishState;
     @Column
@@ -50,11 +52,11 @@ public class Page extends AbstractEntity {
         this.createDate = createDate;
     }
 
-    public Page(DomainId pageId,String title,String ownerName,String channelId)  {
+    public Page(DomainId pageId,String title,Owner owner,String channelId)  {
 
         this.setPageId(pageId);
         this.setTitle(title);
-        this.setOwnerName(ownerName);
+        this.setOwner(owner);
         this.setPublishState(PublishState.DRAFT);
         this.setApprovalState(ApprovalState.INIT);
         this.setCreateDate(DateUtil.getToday().toString());
@@ -68,7 +70,7 @@ public class Page extends AbstractEntity {
         return "Page{" +
                 "columnId=" + pageId +
                 ", title='" + title + '\'' +
-                ", owner=" + ownerName +
+                ", owner=" + owner +
                 ", publishState=" + publishState +
                 ", approvalState=" + approvalState +
                 '}';
@@ -109,15 +111,17 @@ public class Page extends AbstractEntity {
 
 
 
-    public String getOwnerName() {
-        return ownerName;
-    }
 
-    protected void setOwnerName(String ownerName) {
-        this.ownerName = ownerName;
-    }
 
-    public int getPublishState() {
+    public Owner getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Owner owner) {
+		this.owner = owner;
+	}
+
+	public int getPublishState() {
         return publishState;
     }
 

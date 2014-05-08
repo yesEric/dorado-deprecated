@@ -20,6 +20,7 @@ import cn.dorado.util.DateUtil;
 public class Channel extends AbstractEntity {
     @Id
     DomainId channelId;
+    @Column
     String title;
 
     @Column
