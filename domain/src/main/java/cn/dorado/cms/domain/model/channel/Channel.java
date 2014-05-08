@@ -2,10 +2,9 @@ package cn.dorado.cms.domain.model.channel;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
-
-import org.hibernate.annotations.GenericGenerator;
 
 import cn.dorado.cms.domain.AbstractEntity;
 import cn.dorado.cms.domain.DomainId;
@@ -24,9 +23,11 @@ public class Channel extends AbstractEntity {
     String title;
 
     @Column
-    int channelState;
+    @Enumerated(EnumType.STRING)
+    PublishState channelState;
     @Column
-    int approvalState;
+    @Enumerated(EnumType.STRING)
+    ApprovalState approvalState;
     @Column
     String ownerName;
     @Column
@@ -61,19 +62,19 @@ public class Channel extends AbstractEntity {
     }
 
 
-    public int getChannelState() {
+    public PublishState getChannelState() {
         return channelState;
     }
 
-    protected void setChannelState(int chancelState) {
+    protected void setChannelState(PublishState chancelState) {
         this.channelState = chancelState;
     }
 
-    public int getApprovalState() {
+    public ApprovalState getApprovalState() {
         return approvalState;
     }
 
-    protected void setApprovalState(int approvalState) {
+    protected void setApprovalState(ApprovalState approvalState) {
         this.approvalState = approvalState;
     }
 
@@ -120,5 +121,11 @@ public class Channel extends AbstractEntity {
                 ", owner=" + ownerName +
                 ", createDate=" + createDate +
                 '}';
+    }
+    /**
+     * 保存并提交审核
+     */
+    public void commitTo(){
+    	
     }
 }

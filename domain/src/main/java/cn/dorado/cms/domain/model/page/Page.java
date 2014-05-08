@@ -1,19 +1,18 @@
 package cn.dorado.cms.domain.model.page;
 
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
+
 import cn.dorado.cms.domain.AbstractEntity;
 import cn.dorado.cms.domain.DomainId;
 import cn.dorado.cms.domain.model.common.ApprovalState;
 import cn.dorado.cms.domain.model.common.Owner;
 import cn.dorado.cms.domain.model.common.PublishState;
-import cn.dorado.cms.domain.model.common.SmartDate;
 import cn.dorado.util.DateUtil;
-
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
-import java.text.ParseException;
 
 /**
  * Created by Eric on 14-4-29.
@@ -28,9 +27,11 @@ public class Page extends AbstractEntity {
     @Embedded
     Owner owner;
     @Column
-    int publishState;
+    @Enumerated(EnumType.STRING)
+    PublishState publishState;
     @Column
-    int approvalState;
+    @Enumerated(EnumType.STRING)
+    ApprovalState approvalState;
     @Column
     String createDate;
     @Column
@@ -121,19 +122,19 @@ public class Page extends AbstractEntity {
 		this.owner = owner;
 	}
 
-	public int getPublishState() {
+	public PublishState getPublishState() {
         return publishState;
     }
 
-    protected void setPublishState(int publishState) {
+    protected void setPublishState(PublishState publishState) {
         this.publishState = publishState;
     }
 
-    public int getApprovalState() {
+    public ApprovalState getApprovalState() {
         return approvalState;
     }
 
-    protected void setApprovalState(int approvalState) {
+    protected void setApprovalState(ApprovalState approvalState) {
         this.approvalState = approvalState;
     }
 }

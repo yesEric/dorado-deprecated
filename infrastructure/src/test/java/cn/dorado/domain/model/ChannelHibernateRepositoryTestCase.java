@@ -51,4 +51,5 @@ public class ChannelHibernateRepositoryTestCase extends BaseRepositoryTestCase {
         Page page=channelRepository.createPage(pageId, owner, "Test Page", channelId.getId());
         assertNotNull(page);
     }
+    
 }

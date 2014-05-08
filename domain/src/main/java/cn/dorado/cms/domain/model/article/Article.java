@@ -3,6 +3,8 @@ package cn.dorado.cms.domain.model.article;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
@@ -10,7 +12,11 @@ import org.hibernate.annotations.GenericGenerator;
 
 import cn.dorado.cms.domain.AbstractEntity;
 import cn.dorado.cms.domain.DomainId;
+import cn.dorado.cms.domain.model.common.ApprovalState;
 import cn.dorado.cms.domain.model.common.Author;
+import cn.dorado.cms.domain.model.common.CommentScope;
+import cn.dorado.cms.domain.model.common.PrivateState;
+import cn.dorado.cms.domain.model.common.PublishState;
 import cn.dorado.cms.domain.model.page.Page;
 
 /**
@@ -32,13 +38,17 @@ public class Article extends AbstractEntity{
     @Embedded
     Author author;
     @Column
-    int publishState;
+    @Enumerated(EnumType.STRING)
+    PublishState publishState;
     @Column
-    int approvalState;
+    @Enumerated(EnumType.STRING)
+    ApprovalState approvalState;
     @Column
-    int privateState;
+    @Enumerated(EnumType.STRING)
+    PrivateState privateState;
     @Column
-    int commentScope;
+    @Enumerated(EnumType.STRING)
+    CommentScope commentScope;
 //    @OneToMany(mappedBy = "page",targetEntity = Page.class,cascade = {CascadeType.ALL})
 //    @Fetch(FetchMode.JOIN)
 //    Set<Page> pages =new HashSet<Page>();
@@ -127,35 +137,35 @@ public class Article extends AbstractEntity{
 
 
 
-    public int getPublishState() {
+    public PublishState getPublishState() {
         return publishState;
     }
 
-    protected void setPublishState(int publishState) {
+    protected void setPublishState(PublishState publishState) {
         this.publishState = publishState;
     }
 
-    public int getApprovalState() {
+    public ApprovalState getApprovalState() {
         return approvalState;
     }
 
-    protected void setApprovalState(int approvalState) {
+    protected void setApprovalState(ApprovalState approvalState) {
         this.approvalState = approvalState;
     }
 
-    public int getPrivateState() {
+    public PrivateState getPrivateState() {
         return privateState;
     }
 
-    protected void setPrivateState(int privateState) {
+    protected void setPrivateState(PrivateState privateState) {
         this.privateState = privateState;
     }
 
-    public int getCommentScope() {
+    public CommentScope getCommentScope() {
         return commentScope;
     }
 
-    protected void setCommentScope(int commentScope) {
+    protected void setCommentScope(CommentScope commentScope) {
         this.commentScope = commentScope;
     }
 
@@ -242,7 +252,7 @@ public class Article extends AbstractEntity{
      * 添加所属栏目
      * @param page 所属栏目
      */
-    public void addColumn(Page page){
+    public void addToColumn(Page page){
 
     }
 
