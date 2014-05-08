@@ -127,5 +127,30 @@ public class Channel extends AbstractEntity {
      */
     public void commitTo(){
     	
+    	this.setApprovalState(ApprovalState.WAITING);
+    }
+    /**
+     * 设置为审核通过
+     */
+    public void appoved(){
+    	this.setApprovalState(ApprovalState.APPROVED);
+    }
+    /**
+     * 设置为打回
+     */
+    public void reject(){
+    	this.setApprovalState(ApprovalState.REJECTED);
+    }
+    /**
+     * 激活频道
+     */
+    public void active(){
+    	this.setChannelState(PublishState.PUBLISHED);
+    }
+    /**
+     * 关闭频道
+     */
+    public void deactive(){
+    	this.setChannelState(PublishState.CLOSED);
     }
 }

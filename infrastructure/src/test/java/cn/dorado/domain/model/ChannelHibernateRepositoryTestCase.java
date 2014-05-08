@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import cn.dorado.cms.domain.DomainId;
 import cn.dorado.cms.domain.model.channel.Channel;
 import cn.dorado.cms.domain.model.channel.ChannelRepository;
+import cn.dorado.cms.domain.model.common.ApprovalState;
 import cn.dorado.cms.domain.model.common.Owner;
+import cn.dorado.cms.domain.model.common.PublishState;
 import cn.dorado.cms.domain.model.page.Page;
 import cn.dorado.cms.domain.model.page.PageRepository;
 import cn.dorado.domain.BaseRepositoryTestCase;
@@ -33,9 +35,14 @@ public class ChannelHibernateRepositoryTestCase extends BaseRepositoryTestCase {
         Channel channel=new Channel(channelId,"New Test Channel","Eric");
         channelRepository.add(channel);
         assertEquals(channel,channelRepository.ChannelOfId(channelId));
+        channel=channelRepository.ChannelOfId(channelId);
+        assertEquals(channel.getChannelState(),PublishState.DRAFT);
+        assertEquals(channel.getApprovalState(),ApprovalState.INIT);
 
         channelRepository.remove(channel);
+        
         assertNull(channelRepository.ChannelOfId(channelId));
+        
     }
     @Test
     public void testAddPage()throws Exception
@@ -51,5 +58,69 @@ public class ChannelHibernateRepositoryTestCase extends BaseRepositoryTestCase {
         Page page=channelRepository.createPage(pageId, owner, "Test Page", channelId.getId());
         assertNotNull(page);
     }
+    @Test
+    public void testCommitTo()throws Exception{
+    	DomainId channelId=channelRepository.nextIdentity();
+        Owner owner=new Owner();
+        owner.setOwnerName("Eric");
+
+        Channel channel=new Channel(channelId,"New Test Channel","Eric");
+        channel.commitTo();
+        channelRepository.add(channel);
+       
+        channel=channelRepository.ChannelOfId(channelId);
+        assertEquals(channel.getApprovalState(), ApprovalState.WAITING);
+    }
+    @Test
+    public void testApproved()throws Exception{
+     	DomainId channelId=channelRepository.nextIdentity();
+        Owner owner=new Owner();
+        owner.setOwnerName("Eric");
+
+        Channel channel=new Channel(channelId,"New Test Channel","Eric");
+        channel.appoved();
+        channelRepository.add(channel);
+        
+        channel=channelRepository.ChannelOfId(channelId);
+        assertEquals(channel.getApprovalState(),ApprovalState.APPROVED);
+    }
+    @Test
+    public void testReject()throws Exception{
+     	DomainId channelId=channelRepository.nextIdentity();
+        Owner owner=new Owner();
+        owner.setOwnerName("Eric");
+
+        Channel channel=new Channel(channelId,"New Test Channel","Eric");
+        channel.reject();
+        channelRepository.add(channel);
+        
+        channel=channelRepository.ChannelOfId(channelId);
+        assertEquals(channel.getApprovalState(),ApprovalState.REJECTED);
+    }
     
+    @Test
+    public void testActive()throws Exception{
+     	DomainId channelId=channelRepository.nextIdentity();
+        Owner owner=new Owner();
+        owner.setOwnerName("Eric");
+
+        Channel channel=new Channel(channelId,"New Test Channel","Eric");
+        channel.active();
+        channelRepository.add(channel);
+        
+        channel=channelRepository.ChannelOfId(channelId);
+        assertEquals(channel.getChannelState(),PublishState.PUBLISHED);
+    }
+    @Test
+    public void testDeactive()throws Exception{
+     	DomainId channelId=channelRepository.nextIdentity();
+        Owner owner=new Owner();
+        owner.setOwnerName("Eric");
+
+        Channel channel=new Channel(channelId,"New Test Channel","Eric");
+        channelRepository.add(channel);
+        channel.deactive();
+        channel=channelRepository.ChannelOfId(channelId);
+        assertEquals(channel.getChannelState(),PublishState.CLOSED);
+    }
 }
