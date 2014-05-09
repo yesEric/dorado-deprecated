@@ -12,17 +12,22 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 
 import java.util.*;
 
+import javax.validation.Validator;
+
 /**
  * Created by Eric on 14-5-4.
  */
 @ContextConfiguration(
         locations = {"classpath:/applicationContext-resources.xml",
                 "classpath:/applicationContext-dao.xml",
+               
 
                 "classpath:**/applicationContext*.xml"}
 )
 public abstract class BaseRepositoryTestCase extends AbstractTransactionalJUnit4SpringContextTests {
 
+    @Autowired
+    protected  Validator validator;
     @Autowired
     private SessionFactory sessionFactory;
     /**

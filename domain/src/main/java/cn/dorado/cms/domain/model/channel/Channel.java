@@ -5,10 +5,15 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.validation.annotation.Validated;
 
 import cn.dorado.cms.domain.AbstractEntity;
 import cn.dorado.cms.domain.DomainId;
 import cn.dorado.cms.domain.model.common.ApprovalState;
+import cn.dorado.cms.domain.model.common.Owner;
 import cn.dorado.cms.domain.model.common.PublishState;
 import cn.dorado.util.DateUtil;
 
@@ -16,6 +21,7 @@ import cn.dorado.util.DateUtil;
  * Created by Eric on 14-4-29.
  */
 @Entity(name="channel")
+@Validated
 public class Channel extends AbstractEntity {
     @Id
     DomainId channelId;
@@ -24,22 +30,28 @@ public class Channel extends AbstractEntity {
 
     @Column
     @Enumerated(EnumType.STRING)
+    @NotNull
     PublishState channelState;
     @Column
     @Enumerated(EnumType.STRING)
+    @NotNull
     ApprovalState approvalState;
+    @Column    
+    @NotNull(message="{channel.owner.null}")
+    @NotBlank(message = "{channel.owner.null}") 
+    Owner owner;
     @Column
-    String ownerName;
-    @Column
+    @NotNull 
+    @NotBlank
     String createDate;
 
     public Channel(){
         super();
     }
-   public Channel(DomainId channelId,String title,String ownerName){
+   public Channel(DomainId channelId,String title,Owner owner){
        this.setChannelId(channelId);
        this.setTitle(title);
-       this.setOwner(ownerName);
+       this.setOwner(owner);
        this.setCreateDate(DateUtil.getToday().toString());
        this.setChannelState(PublishState.DRAFT);
        this.setApprovalState(ApprovalState.INIT);
@@ -78,12 +90,12 @@ public class Channel extends AbstractEntity {
         this.approvalState = approvalState;
     }
 
-    public String getOwner() {
-        return ownerName;
+    public Owner getOwner() {
+        return owner;
     }
-
-    protected void setOwner(String ownerName) {
-        this.ownerName = ownerName;
+    
+    protected void setOwner(Owner Owner) {
+        this.owner = owner;
     }
 
     public String getCreateDate() {
@@ -118,7 +130,7 @@ public class Channel extends AbstractEntity {
                 ", title='" + title + '\'' +
                 ", chancelState=" + channelState +
                 ", approvalState=" + approvalState +
-                ", owner=" + ownerName +
+                ", owner=" + owner +
                 ", createDate=" + createDate +
                 '}';
     }

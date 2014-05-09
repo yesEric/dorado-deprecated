@@ -38,5 +38,24 @@
 
     <!-- Activates scanning of @Repository 所有的Dao类都放在cn.dorado.cms.domain下面 -->
     <context:component-scan base-package="cn.dorado.infrastructure.persistence"/>
+    
 
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">  
+    <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>  
+    <!-- 如果不加默认到 使用classpath下的 ValidationMessages.properties -->  
+    <property name="validationMessageSource" ref="messageSource"/>  
+</bean>  
+
+<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">  
+    <property name="basenames">  
+        <list>  
+            <!-- 在web环境中一定要定位到classpath 否则默认到当前web应用下找  -->  
+            <value>classpath:ApplicationResources</value>  
+            <value>classpath:org/hibernate/validator/ValidationMessages</value>  
+        </list>  
+    </property>  
+    <property name="useCodeAsDefaultMessage" value="false"/>  
+    <property name="defaultEncoding" value="UTF-8"/>  
+    <property name="cacheSeconds" value="60"/>  
+</bean> 
 </beans>

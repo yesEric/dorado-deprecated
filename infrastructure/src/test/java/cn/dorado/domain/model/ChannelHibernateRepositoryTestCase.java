@@ -1,9 +1,17 @@
 package cn.dorado.domain.model;
 
 import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNull;
 import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertNull;
 
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
+
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -25,6 +33,13 @@ public class ChannelHibernateRepositoryTestCase extends BaseRepositoryTestCase {
     @Autowired
     private   ChannelRepository channelRepository;
     @Autowired PageRepository pageRepository;
+    
+
+//    @BeforeClass
+//    public static void setUp() {
+//       ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+//       validator = factory.getValidator();
+//    }
 
     @Test
     public void testAddAndRemoveChannel() throws Exception{
@@ -32,7 +47,7 @@ public class ChannelHibernateRepositoryTestCase extends BaseRepositoryTestCase {
         Owner owner=new Owner();
         owner.setOwnerName("Eric");
 
-        Channel channel=new Channel(channelId,"New Test Channel","Eric");
+        Channel channel=new Channel(channelId,"New Test Channel",owner);
         channelRepository.add(channel);
         assertEquals(channel,channelRepository.ChannelOfId(channelId));
         channel=channelRepository.ChannelOfId(channelId);
@@ -51,7 +66,7 @@ public class ChannelHibernateRepositoryTestCase extends BaseRepositoryTestCase {
         Owner owner=new Owner();
         owner.setOwnerName("Eric");
 
-        Channel channel=new Channel(channelId,"New Test Channel","Eric");
+        Channel channel=new Channel(channelId,"New Test Channel",owner);
         channelRepository.add(channel);
         
         DomainId pageId=pageRepository.nextIdentity();
@@ -64,7 +79,7 @@ public class ChannelHibernateRepositoryTestCase extends BaseRepositoryTestCase {
         Owner owner=new Owner();
         owner.setOwnerName("Eric");
 
-        Channel channel=new Channel(channelId,"New Test Channel","Eric");
+        Channel channel=new Channel(channelId,"New Test Channel",owner);
         channel.commitTo();
         channelRepository.add(channel);
        
@@ -77,7 +92,7 @@ public class ChannelHibernateRepositoryTestCase extends BaseRepositoryTestCase {
         Owner owner=new Owner();
         owner.setOwnerName("Eric");
 
-        Channel channel=new Channel(channelId,"New Test Channel","Eric");
+        Channel channel=new Channel(channelId,"New Test Channel",owner);
         channel.appoved();
         channelRepository.add(channel);
         
@@ -90,7 +105,7 @@ public class ChannelHibernateRepositoryTestCase extends BaseRepositoryTestCase {
         Owner owner=new Owner();
         owner.setOwnerName("Eric");
 
-        Channel channel=new Channel(channelId,"New Test Channel","Eric");
+        Channel channel=new Channel(channelId,"New Test Channel",owner);
         channel.reject();
         channelRepository.add(channel);
         
@@ -104,7 +119,7 @@ public class ChannelHibernateRepositoryTestCase extends BaseRepositoryTestCase {
         Owner owner=new Owner();
         owner.setOwnerName("Eric");
 
-        Channel channel=new Channel(channelId,"New Test Channel","Eric");
+        Channel channel=new Channel(channelId,"New Test Channel",owner);
         channel.active();
         channelRepository.add(channel);
         
@@ -117,10 +132,29 @@ public class ChannelHibernateRepositoryTestCase extends BaseRepositoryTestCase {
         Owner owner=new Owner();
         owner.setOwnerName("Eric");
 
-        Channel channel=new Channel(channelId,"New Test Channel","Eric");
+        Channel channel=new Channel(channelId,"New Test Channel",owner);
         channelRepository.add(channel);
         channel.deactive();
         channel=channelRepository.ChannelOfId(channelId);
         assertEquals(channel.getChannelState(),PublishState.CLOSED);
+    }
+    @Test
+    public void testNullOwnerValidator()throws Exception{
+    	DomainId channelId=channelRepository.nextIdentity();
+        Owner owner=new Owner();
+       // owner.setOwnerName("Eric");
+        
+
+        Channel channel=new Channel(channelId,"New Test Channel",null);
+        Set<ConstraintViolation<Channel>> constraintViolations =
+      	      validator.validate( channel );
+        assertEquals( 2, constraintViolations.size() );
+        assertEquals(
+                "The owner is not allow null value",
+                constraintViolations.iterator().next().getMessage()
+                );
+        //channelRepository.add(channel);
+    	
+    	
     }
 }
