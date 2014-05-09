@@ -6,7 +6,7 @@ import javax.persistence.Embeddable;
  * Created by Eric on 14-4-29.
  */
 @Embeddable
-public class Owner {
+public class Owner implements User{
     String ownerName;
 
     public String getOwnerName() {

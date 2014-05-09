@@ -1,5 +1,7 @@
 package cn.dorado.cms.domain.model.channel;
 
+import java.util.HashSet;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -13,8 +15,10 @@ import org.springframework.validation.annotation.Validated;
 import cn.dorado.cms.domain.AbstractEntity;
 import cn.dorado.cms.domain.DomainId;
 import cn.dorado.cms.domain.model.common.ApprovalState;
+import cn.dorado.cms.domain.model.common.Approver;
 import cn.dorado.cms.domain.model.common.Owner;
 import cn.dorado.cms.domain.model.common.PublishState;
+import cn.dorado.cms.domain.model.page.Page;
 import cn.dorado.util.DateUtil;
 
 /**
@@ -44,6 +48,14 @@ public class Channel extends AbstractEntity {
     @NotNull 
     @NotBlank
     String createDate;
+    @Column
+    @NotNull 
+    @NotBlank
+    String lastedModifyDate;
+    @Column
+    @NotNull 
+    @NotBlank
+    String approvalDate;
 
     public Channel(){
         super();
@@ -57,6 +69,7 @@ public class Channel extends AbstractEntity {
        this.setApprovalState(ApprovalState.INIT);
 
    }
+   
     public DomainId getChannelId() {
         return channelId;
     }
@@ -137,32 +150,36 @@ public class Channel extends AbstractEntity {
     /**
      * 保存并提交审核
      */
-    public void commitTo(){
-    	
+    public void commitTo(HashSet<Page> pages){
+    	//TODO:提交后需要指定是哪些栏目的
     	this.setApprovalState(ApprovalState.WAITING);
     }
     /**
      * 设置为审核通过
      */
-    public void appoved(){
+    public void appoved(Approver appvoer){
+    	//TODO:审核时要有审核人，同时设置默认审核时间为系统时间
     	this.setApprovalState(ApprovalState.APPROVED);
     }
     /**
      * 设置为打回
      */
-    public void reject(){
+    public void reject(Approver appvoer){
+    	//TODO:审核时要有审核人，同时设置默认审核时间为系统时间
     	this.setApprovalState(ApprovalState.REJECTED);
     }
     /**
      * 激活频道
      */
     public void active(){
+    	//TODO:激化时要设置激活时间
     	this.setChannelState(PublishState.PUBLISHED);
     }
     /**
      * 关闭频道
      */
     public void deactive(){
+    	//TODO:禁止时时要设置激活时间
     	this.setChannelState(PublishState.CLOSED);
     }
 }
