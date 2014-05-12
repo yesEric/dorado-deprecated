@@ -5,10 +5,14 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import cn.dorado.cms.domain.AbstractEntity;
 import cn.dorado.cms.domain.DomainId;
+import cn.dorado.cms.domain.model.channel.Channel;
 import cn.dorado.cms.domain.model.common.ApprovalState;
 import cn.dorado.cms.domain.model.common.Owner;
 import cn.dorado.cms.domain.model.common.PublishState;
@@ -34,18 +38,22 @@ public class Page extends AbstractEntity {
     ApprovalState approvalState;
     @Column
     String createDate;
-    @Column
-    String channelId;
+   
+    @ManyToOne(targetEntity =Channel.class,fetch=FetchType.EAGER)
+    @JoinColumn(name="channelId",updatable=false)
+    Channel channel;
 
-    public String getChannelId() {
-        return channelId;
-    }
+ 
 
-    protected void setChannelId(String channelId) {
-        this.channelId = channelId;
-    }
+    public Channel getChannel() {
+		return channel;
+	}
 
-    public String getCreateDate() {
+	protected void setChannel(Channel channel) {
+		this.channel = channel;
+	}
+
+	public String getCreateDate() {
         return createDate;
     }
 
@@ -53,7 +61,7 @@ public class Page extends AbstractEntity {
         this.createDate = createDate;
     }
 
-    public Page(DomainId pageId,String title,Owner owner,String channelId)  {
+    public Page(DomainId pageId,String title,Owner owner,Channel channel)  {
 
         this.setPageId(pageId);
         this.setTitle(title);
@@ -61,7 +69,7 @@ public class Page extends AbstractEntity {
         this.setPublishState(PublishState.DRAFT);
         this.setApprovalState(ApprovalState.INIT);
         this.setCreateDate(DateUtil.getToday().toString());
-        this.setChannelId(channelId);
+        this.setChannel(channel);
     }
     public Page(){
         super();

@@ -35,6 +35,8 @@ public class DomainId  implements Serializable {
 			return false;
 		return true;
 	}
+	
+	public DomainId(){}
 
 	public DomainId(String domainId){
         this.setId(domainId);

@@ -59,8 +59,9 @@ public class ChannelHibernateRepository extends GenericHibernateRepository imple
     }
 
     
-    public Page createPage(DomainId pageId, Owner owner, String title,String channelId) {
-        Page page=new Page(pageId,title,owner,channelId);
+    public Page createPage(DomainId pageId, Owner owner, String title,Channel channel) {
+        Page page=new Page(pageId,title,owner,channel);
         return page;
     }
+
 }
