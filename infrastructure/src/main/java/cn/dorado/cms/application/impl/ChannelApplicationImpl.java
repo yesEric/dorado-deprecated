@@ -91,7 +91,8 @@ public class ChannelApplicationImpl implements ChannelApplication{
 	}
 	public void createPage(String title, Owner owner, String channelId) {
 		Channel channel=notNullChannel(channelId);
-		pageRepository.add(new Page(pageRepository.nextIdentity(),title,owner,channel));
+		
+		pageRepository.add(channel.createPage(pageRepository.nextIdentity(), owner, title));
 		
 	}
 

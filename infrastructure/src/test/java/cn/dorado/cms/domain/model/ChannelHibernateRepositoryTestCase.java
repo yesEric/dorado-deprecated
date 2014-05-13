@@ -1,10 +1,7 @@
 package cn.dorado.cms.domain.model;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertNull;
-
-import java.util.Collection;
+import static  org.junit.Assert.assertEquals;
+import static  org.junit.Assert.assertNull;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +57,7 @@ public class ChannelHibernateRepositoryTestCase extends BaseRepositoryTestCase {
         channelRepository.add(channel);
         
         DomainId pageId=pageRepository.nextIdentity();
-        Page page=channelRepository.createPage(pageId, owner, "Test Page", channel);
+        Page page=channel.createPage(pageId, owner, "page title");
         pageRepository.add(page);
         
         

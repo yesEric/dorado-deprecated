@@ -267,5 +267,11 @@ public class Channel extends AbstractEntity implements Approvable {
 	public Collection<Page> pages(){
 		return this.getPages();
 	}
+	
+	 public Page createPage(DomainId pageId,Owner owner,String title){
+		
+		 Page page=new Page(pageId,title,owner,this);
+		 return page;
+	 }
 
 }
