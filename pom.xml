@@ -399,10 +399,7 @@
             <artifactId>cxf-rt-frontend-jaxrs</artifactId>
             <version>${cxf.version}</version>
             <exclusions>
-                <exclusion>
-                    <artifactId>*</artifactId>
-                    <groupId>org.springframework</groupId>
-                </exclusion>
+
                 <exclusion>
                     <artifactId>wstx-asl</artifactId>
                     <groupId>org.codehaus.woodstox</groupId>
@@ -523,14 +520,7 @@
                     <artifactId>xml-apis</artifactId>
                     <groupId>xml-apis</groupId>
                 </exclusion>
-                <exclusion>
-                    <artifactId>*</artifactId>
-                    <groupId>velocity</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>*</artifactId>
-                    <groupId>velocity-tools</groupId>
-                </exclusion>
+
             </exclusions>
         </dependency>
         <dependency>
