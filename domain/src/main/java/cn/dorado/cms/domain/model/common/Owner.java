@@ -5,15 +5,23 @@ import javax.persistence.Embeddable;
 /**
  * Created by Eric on 14-4-29.
  */
+@SuppressWarnings("serial")
 @Embeddable
 public class Owner implements User{
     String ownerName;
+    public Owner(){};
 
-    public String getOwnerName() {
-        return ownerName;
+    public Owner(String ownerName){
+    	this.setOwnerName(ownerName);
     }
 
-    public void setOwnerName(String ownerName) {
-        this.ownerName = ownerName;
-    }
+	public String getOwnerName() {
+		return ownerName;
+	}
+
+	protected void setOwnerName(String ownerName) {
+		this.ownerName = ownerName;
+	}
+   
+    
 }

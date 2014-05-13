@@ -1,4 +1,4 @@
-package cn.dorado.infrastructure.persistence;
+package cn.dorado.cms.infrastructure.persistence;
 
 import cn.dorado.cms.domain.DomainId;
 import cn.dorado.cms.domain.model.article.Article;
@@ -6,6 +6,8 @@ import cn.dorado.cms.domain.model.channel.Channel;
 import cn.dorado.cms.domain.model.channel.ChannelRepository;
 import cn.dorado.cms.domain.model.common.Owner;
 import cn.dorado.cms.domain.model.page.Page;
+
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.stereotype.Repository;
 
@@ -63,5 +65,12 @@ public class ChannelHibernateRepository extends GenericHibernateRepository imple
         Page page=new Page(pageId,title,owner,channel);
         return page;
     }
+
+
+	@SuppressWarnings("unchecked")
+	public Collection<Page> pagesOfChannel(Channel channel) {
+	 return	this.getSession().createCriteria(Page.class).add(Restrictions.eq("channel", channel)).list();
+		
+	}
 
 }

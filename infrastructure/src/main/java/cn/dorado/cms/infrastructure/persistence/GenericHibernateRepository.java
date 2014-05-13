@@ -1,4 +1,4 @@
-package cn.dorado.infrastructure.persistence;
+package cn.dorado.cms.infrastructure.persistence;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;

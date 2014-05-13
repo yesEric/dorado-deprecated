@@ -18,6 +18,11 @@
 			<artifactId>dorado-domain</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
+				<dependency>
+			<groupId>${project.parent.groupId}</groupId>
+			<artifactId>dorado-application</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -82,6 +87,14 @@
 							<goal>operation</goal>
 						</goals>
 					</execution>
+					     <execution>
+                        <!-- Runs before integration tests and jetty:run-war -->
+                        <id>test</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>operation</goal>
+                        </goals>
+                    </execution>
 				</executions>
 				<dependencies>
 					<dependency>

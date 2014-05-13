@@ -37,7 +37,7 @@
     <context:annotation-config/>
 
     <!-- Activates scanning of @Repository 所有的Dao类都放在cn.dorado.cms.domain下面 -->
-    <context:component-scan base-package="cn.dorado.infrastructure.persistence"/>
+    <context:component-scan base-package="cn.dorado.cms.infrastructure.persistence"/>
     
 
     <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">  

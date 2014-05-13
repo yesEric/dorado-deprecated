@@ -8,8 +8,15 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>application</artifactId>
+	<artifactId>dorado-application</artifactId>
 	<packaging>jar</packaging>
 
 
+	<dependencies>
+		<dependency>
+			<groupId>${project.parent.groupId}</groupId>
+			<artifactId>dorado-domain</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
 </project>

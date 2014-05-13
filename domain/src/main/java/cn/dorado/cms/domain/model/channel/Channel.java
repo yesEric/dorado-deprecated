@@ -33,7 +33,6 @@ import cn.dorado.util.DateUtil;
  * Created by Eric on 14-4-29.
  */
 @Entity(name = "channel")
-@Validated
 @SuppressWarnings("serial")
 public class Channel extends AbstractEntity implements Approvable {
 	@Id
@@ -42,33 +41,41 @@ public class Channel extends AbstractEntity implements Approvable {
 	String title;
 
 	@Column
+	String description;
+	@Column
 	@Enumerated(EnumType.STRING)
-	@NotNull
 	PublishState channelState;
 	@Column
 	@Enumerated(EnumType.STRING)
-	@NotNull
 	ApprovalState approvalState;
+
 	@Column
-	@NotNull(message = "{channel.owner.null}")
-	@NotBlank(message = "{channel.owner.null}")
-	Owner owner;
-	@Column
-	@NotNull
-	@NotBlank
 	String createDate;
 	@Column
-	@NotBlank
 	String lastedModifyDate;
 	@Column
-	@NotBlank
 	String approvalDate;
+	
+	@Column
+	Approver approver;
+	
+	@Column	
+	@NotNull
+	Owner owner;
 	
 	@OneToMany(targetEntity=Page.class,cascade=CascadeType.ALL)
 	@Fetch(FetchMode.JOIN)
 	@JoinColumn(name="channelId",updatable=false)
 	Set<Page> pages=new HashSet<Page>();
 	
+
+	public String getDescription() {
+		return description;
+	}
+
+	protected void setDescription(String description) {
+		this.description = description;
+	}
 
 	protected Set<Page> getPages() {
 		return pages;
@@ -82,9 +89,10 @@ public class Channel extends AbstractEntity implements Approvable {
 		super();
 	}
 
-	public Channel(DomainId channelId, String title, Owner owner) {
+	public Channel(DomainId channelId, String title, String description,Owner owner) {
 		this.setChannelId(channelId);
 		this.setTitle(title);
+		this.setDescription(description);
 		this.setOwner(owner);
 		this.setCreateDate(DateUtil.getToday().toString());
 		this.setChannelState(PublishState.DRAFT);
@@ -144,7 +152,7 @@ public class Channel extends AbstractEntity implements Approvable {
 		return owner;
 	}
 
-	protected void setOwner(Owner Owner) {
+	protected void setOwner(Owner owner) {
 		this.owner = owner;
 	}
 
@@ -154,6 +162,15 @@ public class Channel extends AbstractEntity implements Approvable {
 
 	protected void setCreateDate(String createDate) {
 		this.createDate = createDate;
+	}
+
+	
+	public Approver getApprover() {
+		return approver;
+	}
+
+	protected void setApprover(Approver approver) {
+		this.approver = approver;
 	}
 
 	@Override
@@ -203,10 +220,11 @@ public class Channel extends AbstractEntity implements Approvable {
 	/**
 	 * 设置为审核通过. 审核时要有审核人，同时设置默认审核时间为系统时间
 	 */
-	public void appoved(Approver appvoer) {
+	public void appoved(Approver appover) {
 		if(this.getApprovalState()!=ApprovalState.WAITING){
 			throw new ChannelException("channel.appoved.error",this.getChannelId().toString());
 		}
+		this.setApprover(appover);
 		this.setApprovalDate(DateUtil.getToday().toString());
 		this.setApprovalState(ApprovalState.APPROVED);
 
@@ -215,10 +233,11 @@ public class Channel extends AbstractEntity implements Approvable {
 	/**
 	 * 设置为打回
 	 */
-	public void reject(Approver appvoer) {
+	public void reject(Approver appover) {
 		if(this.getApprovalState()!=ApprovalState.WAITING){
 			throw new ChannelException("channel.reject.error",this.getChannelId().toString());
 		}
+		this.setApprover(appover);
 		this.setApprovalDate(DateUtil.getToday().toString());
 		this.setApprovalState(ApprovalState.REJECTED);
 	}

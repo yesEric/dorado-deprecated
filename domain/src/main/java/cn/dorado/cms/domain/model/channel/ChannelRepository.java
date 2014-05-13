@@ -19,4 +19,5 @@ public interface ChannelRepository {
     public void removeAll(Collection<Channel> channelCollection);
     public Channel ChannelOfId(DomainId channelId);
     public Page createPage(DomainId pageId,Owner owner,String title,Channel channel);
+    public Collection<Page> pagesOfChannel(Channel channel);
 }

@@ -108,23 +108,17 @@ public final class DateUtil {
      * @return 当前日期
      * @throws java.text.ParseException when String doesn't match the expected format
      */
-    public static Calendar getToday()  {
+    public static String getToday()  {
         Date today = new Date();
         SimpleDateFormat df = new SimpleDateFormat(getDatePattern());
 
         // This seems like quite a hack (date -> string -> date),
         // but it works ;-)
         String todayAsString = df.format(today);
-        Calendar cal = new GregorianCalendar();
-        try{
-            cal.setTime(convertStringToDate(todayAsString));
-        }catch (Exception e){
-                e.printStackTrace();
-
-        }
+       
 
 
-        return cal;
+        return todayAsString;
     }
 
     /**

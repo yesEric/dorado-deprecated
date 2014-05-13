@@ -1,4 +1,4 @@
-package cn.dorado.domain.model;
+package cn.dorado.cms.domain.model;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,6 @@
 package cn.dorado.cms.domain.model.page;
 
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -9,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 import cn.dorado.cms.domain.AbstractEntity;
 import cn.dorado.cms.domain.DomainId;
@@ -26,9 +26,9 @@ public class Page extends AbstractEntity {
     @Id
     DomainId pageId;
     @Column
-    String title;
-    @Column(name="ownerName")
-    @Embedded
+    String title;    
+    @Column
+    @NotNull
     Owner owner;
     @Column
     @Enumerated(EnumType.STRING)

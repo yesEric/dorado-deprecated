@@ -1,4 +1,4 @@
-package cn.dorado.infrastructure.persistence;
+package cn.dorado.cms.infrastructure.persistence;
 
 import cn.dorado.cms.domain.DomainId;
 import cn.dorado.cms.domain.model.article.Article;

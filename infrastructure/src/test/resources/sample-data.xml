@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-  <table name="page">
-        <column>id</column>
-        <column>first_name</column>
-        <column>last_name</column>
 
-        <row>
-            <value description="id">1</value>
-            <value description="first_name">Eric</value>
-            <value description="last_name">Liu</value>
-
-        </row>
-    </table>
 
     
 </dataset>
