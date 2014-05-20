@@ -1,4 +1,3 @@
-
 // This function is used by the login screen to validate user/pass
 // are entered.
 function validateRequired(form) {
@@ -10,18 +9,18 @@ function validateRequired(form) {
 
     for (x in oRequired) {
         if ((form[oRequired[x][0]].type == 'text' || form[oRequired[x][0]].type == 'textarea' || form[oRequired[x][0]].type == 'select-one' || form[oRequired[x][0]].type == 'radio' || form[oRequired[x][0]].type == 'password') && form[oRequired[x][0]].value == '') {
-           if (i == 0)
-              focusField = form[oRequired[x][0]];
+            if (i == 0)
+                focusField = form[oRequired[x][0]];
 
-           fields[i++] = oRequired[x][1];
+            fields[i++] = oRequired[x][1];
 
-           bValid = false;
+            bValid = false;
         }
     }
 
     if (fields.length > 0) {
-       focusField.focus();
-       alert(fields.join('\n'));
+        focusField.focus();
+        alert(fields.join('\n'));
     }
 
     return bValid;
