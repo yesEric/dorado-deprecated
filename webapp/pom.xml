@@ -27,6 +27,13 @@
                     </webApp>
                 </configuration>
             </plugin>
+                       <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>dbunit-maven-plugin</artifactId>
+                        <configuration>
+                            <src>src/main/resources/default-data.xml</src>
+                        </configuration>
+                    </plugin>
             <!-- clean-up previous hibernate-search indexed from integration tests, as there could be a lock -->
             <plugin>
                 <artifactId>maven-clean-plugin</artifactId>
