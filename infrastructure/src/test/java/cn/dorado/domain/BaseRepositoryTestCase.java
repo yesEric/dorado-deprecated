@@ -19,8 +19,7 @@ import javax.validation.Validator;
  */
 @ContextConfiguration(
         locations = {"classpath:/applicationContext-resources.xml",
-                "classpath:/applicationContext-dao.xml",
-               
+                "classpath:/applicationContext-dao.xml",              
 
                 "classpath:**/applicationContext*.xml"}
 )

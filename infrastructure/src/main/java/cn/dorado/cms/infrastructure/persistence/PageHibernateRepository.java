@@ -17,7 +17,13 @@ import java.util.Collection;
 @Repository("pageRepository")
 public class PageHibernateRepository extends GenericHibernateRepository implements PageRepository {
     
-    public DomainId nextIdentity() {
+    public PageHibernateRepository() {
+		super(Page.class);
+		
+	}
+
+
+	public DomainId nextIdentity() {
         return new DomainId(java.util.UUID.randomUUID().toString().toUpperCase());
     }
 

@@ -1,8 +1,8 @@
 package cn.dorado.cms.application.channel;
 
 import java.util.Collection;
+import java.util.List;
 
-import cn.dorado.cms.domain.DomainId;
 import cn.dorado.cms.domain.model.channel.Channel;
 import cn.dorado.cms.domain.model.common.Approver;
 import cn.dorado.cms.domain.model.common.Owner;
@@ -19,5 +19,6 @@ public interface ChannelApplication {
 	public ChannelDto channelOfId(String channelId);
 	public Collection<Page> pages(String channelId);
 	public void createPage(String title,Owner owner,String channelId);
+	public List<Channel> allChannels();
 	
 }

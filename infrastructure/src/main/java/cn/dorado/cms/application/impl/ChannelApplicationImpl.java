@@ -2,6 +2,7 @@ package cn.dorado.cms.application.impl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
+import java.util.List;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.logging.Log;
@@ -93,6 +94,10 @@ public class ChannelApplicationImpl implements ChannelApplication{
 		Channel channel=notNullChannel(channelId);
 		
 		pageRepository.add(channel.createPage(pageRepository.nextIdentity(), owner, title));
+		
+	}
+	public List<Channel> allChannels() {
+		return channelRepository.allChannels();
 		
 	}
 
