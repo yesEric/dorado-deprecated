@@ -16,7 +16,7 @@
     </modules>
     <properties>
         <!--设置数据库配置-->
-        <db.name>mycms</db.name>
+        <db.name>dorado</db.name>
         <jdbc.groupId>mysql</jdbc.groupId>
         <jdbc.artifactId>mysql-connector-java</jdbc.artifactId>
         <jdbc.version>5.1.27</jdbc.version>
