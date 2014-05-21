@@ -29,7 +29,8 @@ public  class GenericHibernateRepository<T,PK extends Serializable> {
     public SessionFactory getSessionFactory() {
         return this.sessionFactory;
     }
-
+   //解决Web层中无法获取Session的办法是在此处创建多线程管理。
+    //这个问题是由于Hibernate4中get方式时没有Session不会自动创建的问题。
     public final ThreadLocal<T> session=new ThreadLocal<T>();
     /**
      * 简单的工厂方法，用于获取Session对象.
